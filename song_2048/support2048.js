@@ -1,9 +1,14 @@
+documentWidth=window.screen.availWidth;
+gridContainerWidth = 0.92*documentWidth;
+cellSideLength = 0.18*documentWidth;
+cellSpace = 0.04*documentWidth;
+
 function getPosTop(i,j){
-	return 20+i*120;
+	return cellSpace+i*(cellSpace+cellSideLength);
 }
 
 function getPosLeft(i,j){
-	return 20+j*120;
+	return cellSpace+j*(cellSpace+cellSideLength);
 }
 
 function getNumberBackgroundColor( number ){
@@ -25,7 +30,27 @@ function getNumberBackgroundColor( number ){
 
     return "black";
 }
+/*
+function getText( number ){
+    switch( number ){
+        case 2:return "baby";break;
+        case 4:return "kid";break;
+        case 8:return "teen";break;
+        case 16:return "adult";break;
+        case 32:return "fighter";break;
+        case 64:return "master";break;
+        case 128:return "monster";break;
+        case 256:return "king";break;
+        case 512:return "god";break;
+        case 1024:return "creator";break;
+        case 2048:return "editor";break;
+        case 4096:return "me";break;
+        case 8192:return "mywife";break;
+    }
 
+    return null;
+}
+*/
 function getNumberColor( number ){
     if( number <= 4 )
         return "#776e65";
@@ -90,5 +115,10 @@ function noBlockHorizontal(row,col1,col2,board){
 function noBlockVertical(col,row1,row2,board){
 	for(var i=row1+1;i<row2;i++)
 		if(board[i][col]!=0)return false;
+	return true;
+}
+
+function nomove(board){
+	if(canMoveDown(board)||canMoveLeft(board)||canMoveRight(board)||canMoveUp(board))return false;
 	return true;
 }
